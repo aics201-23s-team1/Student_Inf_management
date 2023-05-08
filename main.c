@@ -21,7 +21,7 @@ json_object *add_student(char *name, unsigned int age, char *phone, char *parent
         return 1;
     }
 
-    json_object *student = json_object_array_get_idx(rootValue, 0);
+    json_object *student = json_object_new_object();
 	json_object_object_add(student, "name", json_object_new_string(name));
 	json_object_object_add(student, "age", json_object_new_int(age));
 
@@ -53,6 +53,10 @@ int main(){
 		switch (choice) {
 			case 1:
 				add_student("test", 21, "010-1234-1234", "010-4321-4321", "asdf : 12:30");
+                add_student("test", 22, "010-1234-1234", "010-4321-4321", "asdf : 12:30");
+                add_student("test", 23, "010-1234-1234", "010-4321-4321", "asdf : 12:30");
+                add_student("test", 24, "010-1234-1234", "010-4321-4321", "asdf : 12:30");
+                add_student("test", 25, "010-1234-1234", "010-4321-4321", "asdf : 12:30");
 				break;
 			case 4:
 				break;
