@@ -18,7 +18,7 @@ json_object *add_student(char *name, unsigned int age, char *phone, char *parent
 	rootValue = json_object_from_file(FILE_PATH);
     	if (!rootValue) {
         	printf("Failed to parse JSON data.\n");
-        	return 1;
+        	return rootValue;
     	}
 
 	json_object *student = json_object_new_object();
