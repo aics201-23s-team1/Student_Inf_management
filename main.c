@@ -15,13 +15,13 @@ json_object *add_student(char *name, unsigned int age, char *phone, char *parent
 	json_object *phone_num, *rootValue;
 
 	phone_num = json_object_new_object();
-    rootValue = json_object_from_file(FILE_PATH);
-    if (!rootValue) {
-        printf("Failed to parse JSON data.\n");
-        return 1;
-    }
+	rootValue = json_object_from_file(FILE_PATH);
+    	if (!rootValue) {
+        	printf("Failed to parse JSON data.\n");
+        	return 1;
+    	}
 
-    json_object *student = json_object_new_object();
+	json_object *student = json_object_new_object();
 	json_object_object_add(student, "name", json_object_new_string(name));
 	json_object_object_add(student, "age", json_object_new_int(age));
 
@@ -31,9 +31,9 @@ json_object *add_student(char *name, unsigned int age, char *phone, char *parent
 
 	json_object_object_add(student, "class_time", json_object_new_string(class_time));
 
-    json_object_array_add(rootValue, student);
+	json_object_array_add(rootValue, student);
     
-    json_object_to_file("student.json", rootValue);
+	json_object_to_file("student.json", rootValue);
 
 	return rootValue;
 }
