@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <json-c/json.h>
+#include <stddef.h>
 
 #define FILE_PATH "student.json"
 
@@ -11,7 +12,7 @@ typedef struct student{
 	char class_time[30];
 }student_t;
 
-json_object *add_student(char *name, unsigned int age, char *phone, char *parent_phone, char *class_time){
+json_object *add_student(char *name, size_t age, char *phone, char *parent_phone, char *class_time){
 	json_object *phone_num, *rootValue;
 
 	phone_num = json_object_new_object();
@@ -40,7 +41,7 @@ json_object *add_student(char *name, unsigned int age, char *phone, char *parent
 
 
 
-int main(){
+int main(int argc, char *argv[]){
 	//사용할 기능의 번호 입력, 입력한 값에 따른 함수 사용
 	int choice;
 	while(1) {
