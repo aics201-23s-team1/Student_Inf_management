@@ -23,6 +23,18 @@ int student_inf_managerment() {
 	return 0;
 }
 
+int time_check(char *time) {
+	unsigned int year, month, day, hour, minute;
+	int ok = 0;
+
+	ok = sscanf(time, "%d-%d-%d-%d:%d", &year, &month, &day, &hour, &minute);
+	assert(ok == 5);
+	if(month < 13 && day < 32 && hour < 25 && minute < 61) {
+		return 0;
+	}
+	return -1;
+}
+
 int add_student(char *name, size_t age, char *phone, char *parent_phone, char *class_time){
 	json_object *phone_num, *rootValue, *student;
 
@@ -50,20 +62,6 @@ int add_student(char *name, size_t age, char *phone, char *parent_phone, char *c
 	return 1;
 }
 
-/* To do */
-int time_check(char *time) {
-	unsigned int year, month, day, hour, minute;
-	int ok = 0;
-
-	ok = sscanf(time, "%d-%d-%d-%d:%d", &year, &month, &day, &hour, &minute);
-	assert(ok == 5);
-	if(month < 13 && day < 32 && hour < 25 && minute < 61) {
-		return 0;
-	}
-	return -1;
-}
-
-/* To do */
 int add_class(char *name, char *start_time, char *end_time, char *subject) {
 	json_object *class, *rootValue;
 	unsigned int year, month, day, hour, minute;
