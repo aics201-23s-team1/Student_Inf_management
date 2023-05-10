@@ -97,7 +97,6 @@ int add_class(char *name, char *start_time, char *end_time, char *subject) {
 int main(int argc, char *argv[]){
 	//사용할 기능의 번호 입력, 입력한 값에 따른 함수 사용
 	int choice;
-	student_inf_managerment();
 	while(1) {
 		printf("1. 학생 정보 추가 \n");
 		printf("2. 학생 정보 제거 \n");
@@ -106,6 +105,9 @@ int main(int argc, char *argv[]){
 		printf("원하는 기능의 번호 입력: ");
 		scanf("%d", &choice);
 		switch (choice) {
+			case 0:
+				student_inf_managerment();
+				break;
 			case 1:
 				add_student("test", 21, "010-1234-1234", "010-4321-4321", "asdf : 12:30");
 				add_student("test", 22, "010-1234-1234", "010-4321-4321", "asdf : 12:30");
