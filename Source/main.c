@@ -7,14 +7,6 @@
 #define STUDENT_FILE "json/student.json"
 #define CLASS_FILE "json/class.json"
 
-typedef struct student{
-	char name[5];
-	int age;
-	char phone[14];
-	char parent_phone[14];
-	char class_time[30];
-}student_t;
-
 int student_inf_managerment() {
 	FILE *fp = fopen(STUDENT_FILE, "wt");
 	FILE *fp2 = fopen(CLASS_FILE, "wt");
