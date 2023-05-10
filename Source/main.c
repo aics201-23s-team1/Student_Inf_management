@@ -41,6 +41,7 @@ int add_student(char *name, size_t age, char *phone, char *parent_phone, char *c
 	return 1;
 }
 
+/*
 json_object *del_student(char *name){
 	json_object *rootValue;
 
@@ -63,6 +64,17 @@ json_object *del_student(char *name){
 	}
 	return rootValue;
 }
+*/
+
+/* To do */
+int time_check(char *time) {
+	unsigned int year, month, day, hour, minute;
+
+	sscanf(time, "%d-%d-%d-%d:%d", &year, &month, &day, &hour, &minute);
+	if(year > 24 || month > 12 || day > 31 || hour > 24 || minute > 60) {
+		return -1;
+	}
+}
 
 /* To do */
 int add_class(char *name, char *start_time, char *end_time, char *subject) {
@@ -72,17 +84,24 @@ int add_class(char *name, char *start_time, char *end_time, char *subject) {
 	rootValue = json_object_from_file(STUDENT_FILE);
 	if (!rootValue) {
 		printf("Failed to parse JSON data.\n");
-		return NULL;
+		return -1;
 	}
 	
 	class = json_object_new_object();
 	json_object_object_add(class, "name", json_object_new_string(name));
+	
+	time_check(start_time);
+	json_object_object_add(class, "start_time", json_object_new_string(name));
+	time_check(end_time);
+	json_object_object_add(class, "end_time", json_object_new_string(name));
 
-	sscanf(start_time, "%d-%d-%d-%d:%d", &year, &month, &day, &hour, &minute);
-	if(year > 24 || month > 12 || day > 31 || hour > 24 || minute > 60) {
-		return -1;
-	}
-	json_object_object_add(class, "start_time", json_object_new_string(name));	
+	json_object_object_add(class, "subject", json_object_new_string(subject));
+
+	json_object_array_add(rootValue, class);
+    
+	json_object_to_file(CLASS_FILE, rootValue);
+
+	return 1;
 }
 
 
