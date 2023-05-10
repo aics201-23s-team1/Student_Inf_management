@@ -4,8 +4,8 @@
 #include <stddef.h>
 #include <assert.h>
 
-#define STUDENT_FILE "student.json"
-#define CLASS_FILE "class.json"
+#define STUDENT_FILE "json/student.json"
+#define CLASS_FILE "json/class.json"
 
 typedef struct student{
 	char name[5];
@@ -14,6 +14,22 @@ typedef struct student{
 	char parent_phone[14];
 	char class_time[30];
 }student_t;
+
+int student_inf_managerment() {
+	FILE *fp = fopen(STUDENT_FILE, "wt");
+	FILE *fp2 = fopen(CLASS_FILE, "wt");
+
+	if(fp == NULL || fp2 == NULL) {
+		return -1;
+	}
+	
+	fprintf(fp, "[]");
+	fprintf(fp2, "[]");
+	fclose(fp);
+	fclose(fp2);
+
+	return 0;
+}
 
 int add_student(char *name, size_t age, char *phone, char *parent_phone, char *class_time){
 	json_object *phone_num, *rootValue, *student;
@@ -89,6 +105,7 @@ int add_class(char *name, char *start_time, char *end_time, char *subject) {
 int main(int argc, char *argv[]){
 	//사용할 기능의 번호 입력, 입력한 값에 따른 함수 사용
 	int choice;
+	student_inf_managerment();
 	while(1) {
 		printf("1. 학생 정보 추가 \n");
 		printf("2. 학생 정보 제거 \n");
