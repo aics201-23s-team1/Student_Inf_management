@@ -81,7 +81,7 @@ int add_class(char *name, char *start_time, char *end_time, char *subject) {
 	json_object *class, *rootValue;
 	unsigned int year, month, day, hour, minute;
 
-	rootValue = json_object_from_file(STUDENT_FILE);
+	rootValue = json_object_from_file(CLASS_FILE);
 	if (!rootValue) {
 		printf("Failed to parse JSON data.\n");
 		return -1;
