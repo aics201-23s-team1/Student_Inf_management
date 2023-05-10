@@ -2,7 +2,8 @@
 #include <json-c/json.h>
 #include <stddef.h>
 
-#define FILE_PATH "student.json"
+#define STUDENT_FILE "student.json"
+#define CLASS_FILE "class.json"
 
 typedef struct student{
 	char name[5];
@@ -12,17 +13,17 @@ typedef struct student{
 	char class_time[30];
 }student_t;
 
-int *add_student(char *name, size_t age, char *phone, char *parent_phone, char *class_time){
-	json_object *phone_num, *rootValue;
+int add_student(char *name, size_t age, char *phone, char *parent_phone, char *class_time){
+	json_object *phone_num, *rootValue, *student;
 
 	phone_num = json_object_new_object();
-	rootValue = json_object_from_file(FILE_PATH);
-    	if (!rootValue) {
-        	printf("Failed to parse JSON data.\n");
-        	return NULL;
-    	}
+	rootValue = json_object_from_file(STUDENT_FILE);
+	if (!rootValue) {
+		printf("Failed to parse JSON data.\n");
+		return -1;
+	}
 
-	json_object *student = json_object_new_object();
+	student = json_object_new_object();
 	json_object_object_add(student, "name", json_object_new_string(name));
 	json_object_object_add(student, "age", json_object_new_int(age));
 
@@ -34,9 +35,30 @@ int *add_student(char *name, size_t age, char *phone, char *parent_phone, char *
 
 	json_object_array_add(rootValue, student);
     
-	json_object_to_file("student.json", rootValue);
+	json_object_to_file(STUDENT_FILE, rootValue);
 
 	return 1;
+}
+
+/* To do */
+int add_class(char *name, char *start_time, char *end_time, char *subject) {
+	json_object *class, *rootValue;
+	unsigned int year, month, day, hour, minute;
+
+	rootValue = json_object_from_file(STUDENT_FILE);
+	if (!rootValue) {
+		printf("Failed to parse JSON data.\n");
+		return NULL;
+	}
+	
+	class = json_object_new_object();
+	json_object_object_add(class, "name", json_object_new_string(name));
+
+	sscanf(start_time, "%d-%d-%d-%d:%d", &year, &month, &day, &hour, &minute);
+	if(year > 24 || month > 12 || day > 31 || hour > 24 || minute > 60) {
+		return -1;
+	}
+	json_object_object_add(class, "start_time", json_object_new_string(name));	
 }
 
 
@@ -57,6 +79,9 @@ int main(int argc, char *argv[]){
 				add_student("test", 23, "010-1234-1234", "010-4321-4321", "asdf : 12:30");
 				add_student("test", 24, "010-1234-1234", "010-4321-4321", "asdf : 12:30");
 				add_student("test", 25, "010-1234-1234", "010-4321-4321", "asdf : 12:30");
+				break;
+			case 2:
+				add_class("test", "2022-12-31-11:22", "2022-12-31-11:22", "asdf");
 				break;
 			case 4:
 				break;
