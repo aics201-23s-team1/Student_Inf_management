@@ -12,7 +12,7 @@ typedef struct student{
 	char class_time[30];
 }student_t;
 
-json_object *add_student(char *name, size_t age, char *phone, char *parent_phone, char *class_time){
+int *add_student(char *name, size_t age, char *phone, char *parent_phone, char *class_time){
 	json_object *phone_num, *rootValue;
 
 	phone_num = json_object_new_object();
@@ -36,7 +36,7 @@ json_object *add_student(char *name, size_t age, char *phone, char *parent_phone
     
 	json_object_to_file("student.json", rootValue);
 
-	return rootValue;
+	return 1;
 }
 
 
