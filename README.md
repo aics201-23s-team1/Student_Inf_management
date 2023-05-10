@@ -9,10 +9,12 @@ OS
 3. Windows ❓
 
 
-# Build MacOS
+# How to use(MacOS)
 
 only GCC Compile
 ```
-gcc -o -Wl,-L/usr/local/lib,-I/usr/local/include/json-c -ljson-c -o main main.c
+git clone https://github.com/aics201-23s-team1/Student_Inf_management.git Student_Inf_management
+cd Student_Inf_management/Source
+make
 ```
 
