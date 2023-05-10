@@ -42,31 +42,6 @@ int add_student(char *name, size_t age, char *phone, char *parent_phone, char *c
 	return 1;
 }
 
-/*
-json_object *del_student(char *name){
-	json_object *rootValue;
-
-	rootValue = json_object_from_file(FILE_PAHT);
-	if(!rootValue){
-		printf("Failed to parse Json data. \n");
-		return rootValue;
-	}
-
-	struct json_object *obj = NULL;
-
-	json_object_objcet_foreach(rootValue, key, val){
-		if(strcmp(key, name) == 0 && json_object_is_type(val, json_type_object)){
-			obj = json_object_object_Get(val, "name");
-			if(obj != NULL && strcmp(json_object_get_string(obj), name) == 0){
-				json_object_object_del(rootValue, key);
-				break;
-			}
-		}
-	}
-	return rootValue;
-}
-*/
-
 /* To do */
 int time_check(char *time) {
 	unsigned int year, month, day, hour, minute;
