@@ -67,19 +67,21 @@ json_object *del_student(char *name){
 */
 
 /* To do */
-void time_check(char *time) {
+int time_check(char *time) {
 	unsigned int year, month, day, hour, minute;
 
 	sscanf(time, "%d-%d-%d-%d:%d", &year, &month, &day, &hour, &minute);
 	if(year > 24 || month > 12 || day > 31 || hour > 24 || minute > 60) {
 		return -1;
 	}
+	return 0;
 }
 
 /* To do */
 int add_class(char *name, char *start_time, char *end_time, char *subject) {
 	json_object *class, *rootValue;
 	unsigned int year, month, day, hour, minute;
+	int ok = 0;
 
 	rootValue = json_object_from_file(CLASS_FILE);
 	if (!rootValue) {
@@ -90,9 +92,15 @@ int add_class(char *name, char *start_time, char *end_time, char *subject) {
 	class = json_object_new_object();
 	json_object_object_add(class, "name", json_object_new_string(name));
 	
-	time_check(start_time);
+	ok = time_check(start_time);
+	if(ok < 0) {
+		return 0;
+	}
 	json_object_object_add(class, "start_time", json_object_new_string(name));
-	time_check(end_time);
+	ok = time_check(end_time);
+	if(ok < 0) {
+		return 0;
+	}
 	json_object_object_add(class, "end_time", json_object_new_string(name));
 
 	json_object_object_add(class, "subject", json_object_new_string(subject));
