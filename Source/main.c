@@ -67,7 +67,7 @@ json_object *del_student(char *name){
 */
 
 /* To do */
-int time_check(char *time) {
+void time_check(char *time) {
 	unsigned int year, month, day, hour, minute;
 
 	sscanf(time, "%d-%d-%d-%d:%d", &year, &month, &day, &hour, &minute);
