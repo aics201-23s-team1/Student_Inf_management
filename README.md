@@ -3,9 +3,13 @@
 Json-c : [json-c](https://github.com/json-c/json-c)
 
 OS
+
 Linux ✅
+
 Macos ✅
+
 Windows ❓
+
 
 # Build MacOS
 
