@@ -63,7 +63,7 @@ int add_student(char *name, size_t age, char *phone, char *parent_phone, char *c
 }
 
 int del_student(const char *name){
-	json_object *rootValue, *del_stduent_name;
+	json_object *rootValue, *del_student_name;
 
 	rootValue = json_object_from_file(STUDENT_FILE);
 	if (!rootValue){
@@ -71,22 +71,23 @@ int del_student(const char *name){
 		return -1;
 	}
 
-	del_stduent_name = NULL;
+	del_student_name = NULL;
 	json_object_object_foreach(rootValue, key, val){
 		if(json_object_equal(val, json_object_new_string(name))){
-			del_stduent_name = rootValue;
+			del_student_name = rootValue;
 			break;
 		}
 	}
 
-	if(del_stduent_name == NULL){
+	if(del_student_name == NULL){
 		printf("No student with the name entered. \n");
 		return -1;
 	}
 
-	json_object_put(del_stduent_name);
+	json_object_put(del_student_name);
 
 	json_object_to_file(STUDENT_FILE, rootValue);
+
 
 	return 1;
 }
